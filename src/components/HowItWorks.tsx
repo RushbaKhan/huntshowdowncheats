@@ -65,7 +65,7 @@ export function HowItWorks() {
               color: 'var(--text-primary)',
               lineHeight: 1.1,
             }}>
-              Up and running in minutes.
+              Get Undetected Hunt Showdown Cheats Running in Minutes
             </h2>
           </div>
 

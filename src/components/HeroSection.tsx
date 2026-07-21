@@ -115,7 +115,7 @@ export function HeroSection() {
           maxWidth: '520px',
           marginBottom: 'clamp(28px, 4vw, 40px)',
         }}>
-          Take your Hunt Showdown gameplay to the next level with undetected aimbot, full ESP, triggerbot, and radar. See hunters through walls, silent aim, recoil control, and stream-proof mode. Updated after every patch.
+          Undetected Hunt Showdown Cheats with Hunt Showdown Aimbot, Hunt Showdown ESP, Hunt Showdown Wallhack, Hunt Showdown Triggerbot, Hunt Showdown Radar and Hunt Showdown DMA support. See every hunter through walls, land silent aim shots, control recoil, and stay stream-proof. Updated after every Crytek patch.
         </p>
 
         <div style={{

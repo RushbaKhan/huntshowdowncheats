@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { SEO_KEYWORDS } from '../config/seo';
 import { DEFAULT_OG_IMAGE, SITE_URL } from '../config/site';
 
 export { SITE_URL, DEFAULT_OG_IMAGE };
@@ -9,10 +10,13 @@ type SeoProps = {
   path: string;
   image?: string;
   type?: 'website' | 'article';
-  structuredData?: Record<string, unknown>;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 };
 
 function absoluteUrl(pathOrUrl: string) {
+  if (pathOrUrl.startsWith('http://') || pathOrUrl.startsWith('https://')) {
+    return pathOrUrl;
+  }
   return new URL(pathOrUrl, SITE_URL).toString();
 }
 
@@ -48,15 +52,34 @@ export function Seo({
 }: SeoProps) {
   const canonicalUrl = absoluteUrl(path);
   const imageUrl = absoluteUrl(image);
-  const structuredDataJson = structuredData ? JSON.stringify(structuredData) : '';
+  const structuredDataJson = structuredData
+    ? JSON.stringify(
+        Array.isArray(structuredData)
+          ? { '@context': 'https://schema.org', '@graph': structuredData }
+          : structuredData
+      )
+    : '';
 
   useEffect(() => {
     document.title = title;
     upsertMeta('meta[name="description"]', { name: 'description', content: description });
-    upsertMeta('meta[name="robots"]', { name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' });
-    upsertMeta('meta[name="keywords"]', { name: 'keywords', content: 'hunt showdown cheats, huntshowdown cheats, hunt cheats, hunt showdown aimbot, huntshowdown aimbot, hunt showdown esp, huntshowdown esp, hunt showdown triggerbot, huntshowdown triggerbot, hunt esp, hunt aimbot' });
-    upsertMeta('meta[name="twitter:card"]', { name: 'twitter:card', content: 'summary_large_image' });
+    upsertMeta('meta[name="robots"]', {
+      name: 'robots',
+      content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+    });
+    upsertMeta('meta[name="keywords"]', { name: 'keywords', content: SEO_KEYWORDS });
+    upsertMeta('meta[name="author"]', { name: 'author', content: 'HuntShowdownCheats' });
+    upsertMeta('meta[name="googlebot"]', { name: 'googlebot', content: 'index, follow' });
     upsertMeta('meta[property="og:site_name"]', { property: 'og:site_name', content: 'HuntShowdownCheats' });
+    upsertMeta('meta[property="og:locale"]', { property: 'og:locale', content: 'en_US' });
+    upsertMeta('meta[property="og:image:width"]', { property: 'og:image:width', content: '1920' });
+    upsertMeta('meta[property="og:image:height"]', { property: 'og:image:height', content: '1080' });
+    upsertMeta('meta[name="twitter:card"]', { name: 'twitter:card', content: 'summary_large_image' });
+    upsertMeta('meta[name="twitter:site"]', { name: 'twitter:site', content: '@huntshowdowncheats' });
+    upsertMeta('meta[name="twitter:image:alt"]', {
+      name: 'twitter:image:alt',
+      content: 'Hunt Showdown Cheats – Aimbot, ESP, Wallhack and Triggerbot',
+    });
     upsertLink('link[rel="canonical"]', { rel: 'canonical', href: canonicalUrl });
     upsertMeta('meta[property="og:type"]', { property: 'og:type', content: type });
     upsertMeta('meta[property="og:url"]', { property: 'og:url', content: canonicalUrl });

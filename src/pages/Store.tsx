@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { AnimatedSection } from '../components/AnimatedSection';
 import { ScreenshotSlider } from '../components/ScreenshotSlider';
+import { STORE_FAQ_ITEMS } from '../config/seo';
 import { BUY_URL, VIDEO_URL } from '../config/site';
 
 const espFeatures = [
@@ -31,40 +32,7 @@ const generalFeatures = [
   { label: '24/7 Discord support', desc: 'always online' },
 ];
 
-const faqs: { q: string; a: string }[] = [
-  {
-    q: 'Can I use my Hunt Showdown cheat license on more than one PC?',
-    a: 'Each license is tied to one hardware ID (HWID). If you need to transfer to a new PC, contact our support team and we will handle the transfer for you.',
-  },
-  {
-    q: 'Is the Hunt Showdown aimbot difficult to set up?',
-    a: 'Not at all. Setup is quick and straightforward. We provide a full instructions page and video guide. The entire process takes less than a minute.',
-  },
-  {
-    q: 'Will the Hunt Showdown ESP affect FPS or performance?',
-    a: 'No. Our cheat is external and runs as a separate process, meaning it has minimal impact on game performance. Most users report no noticeable FPS difference.',
-  },
-  {
-    q: 'What payment methods do you accept?',
-    a: 'We accept all major payment methods including credit/debit cards, crypto, and other options available at checkout.',
-  },
-  {
-    q: 'The cheat stopped working after a Hunt Showdown game update. What do I do?',
-    a: 'After any Hunt Showdown patch, download the newest loader from your order page. Updates usually land within hours of the game build changing.',
-  },
-  {
-    q: 'How do I purchase Hunt Showdown cheats?',
-    a: 'Click the purchase button, complete checkout, and receive your loader link and setup instructions immediately.',
-  },
-  {
-    q: 'Is the Hunt Showdown aimbot undetected?',
-    a: 'Yes. Our Hunt Showdown cheat is external and has remained undetected. We update after every patch to maintain safety.',
-  },
-  {
-    q: 'Does the ESP work through walls in Hunt Showdown?',
-    a: 'Yes. The ESP shows enemy players, loot, and items through all walls and structures. You can adjust the range and what information is displayed.',
-  },
-];
+const faqs = [...STORE_FAQ_ITEMS];
 
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
@@ -483,6 +451,8 @@ export function StorePage() {
               loop
               muted
               playsInline
+              preload="metadata"
+              aria-label="Hunt Showdown cheats ESP wallhack aimbot demo video"
               style={{
                 width: '100%',
                 height: 'auto',

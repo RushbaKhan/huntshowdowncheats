@@ -229,6 +229,35 @@ export function FeaturesGrid() {
                 fontWeight: 700,
                 color: 'var(--text-primary)',
                 marginBottom: '20px',
+              }}>
+                Hunt Showdown Wallhack, Triggerbot, Radar & DMA
+              </h3>
+              <p style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: '0.9rem',
+                color: 'var(--text-secondary)',
+                lineHeight: 1.7,
+                marginBottom: '24px',
+              }}>
+                Beyond aimbot, our undetected Hunt Showdown cheats package includes Hunt Showdown Triggerbot for instant firing, Hunt Showdown Radar for map-wide enemy tracking, Hunt Showdown Wallhack for full structural visibility, and Hunt Showdown DMA support via Cloud-DMA for hardware-level safety.
+              </p>
+              <ul style={{ listStyle: 'none', padding: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '8px', marginBottom: 'clamp(40px, 6vw, 64px)' }}>
+                <BulletItem label="Hunt Showdown Triggerbot" desc="fires the instant your crosshair touches an enemy hitbox — configurable delay for natural reaction time." />
+                <BulletItem label="Hunt Showdown Radar" desc="mini-map overlay showing hunter positions, bosses, and extraction points in real time." />
+                <BulletItem label="Hunt Showdown Wallhack" desc="renders enemies through every wall, door, and terrain feature with adjustable opacity." />
+                <BulletItem label="Hunt Showdown DMA" desc="Cloud-DMA option for hardware-level memory reading — the safest profile for long-term use." />
+              </ul>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection>
+            <div>
+              <h3 style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(1.2rem, 2.5vw, 1.5rem)',
+                fontWeight: 700,
+                color: 'var(--text-primary)',
+                marginBottom: '20px',
               }}>Loot & World ESP Features – <span className="gradient-text">Never Miss High-Value Gear</span></h3>
               <p style={{
                 fontFamily: 'var(--font-body)',

@@ -61,7 +61,7 @@ export function Integrations() {
           color: 'var(--text-primary)',
           lineHeight: 1.1,
         }}>
-          Built for your setup.
+          Hunt Showdown DMA & System Compatibility
         </h2>
       </div>
 

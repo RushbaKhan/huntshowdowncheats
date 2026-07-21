@@ -45,7 +45,7 @@ export function SafetySection() {
               <span className="gradient-text">Engineered to Stay Safe.</span>
             </h2>
             {[
-              "Hunt Showdown cheats built specifically for Crytek's extraction shooter — steady updates, thorough documentation, and a loader that tracks the live game client. When Crytek ships a patch, the team works fast so you stay on the build that matches official servers.",
+              'Hunt Showdown cheats built specifically for Crytek\'s extraction shooter — undetected Hunt Showdown Aimbot, Hunt Showdown ESP, Hunt Showdown Wallhack, Hunt Showdown Triggerbot, Hunt Showdown Radar and Hunt Showdown DMA support with steady updates after every patch.',
               'After every game update, download the latest loader from your order page — same place your files appeared right after checkout. That keeps your Hunt Showdown cheat aligned with the newest client version at all times.',
               'Need help with setup? Dedicated guides, video walkthroughs, and a support ticket system are always available. Get direct answers from people who actually maintain the Hunt Showdown ESP and aimbot product.',
             ].map((p, i) => (

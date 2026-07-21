@@ -4,6 +4,7 @@ import { BUY_URL } from '../config/site';
 const NAV = [
   { label: 'Home', to: '/' as const },
   { label: 'Blogs', to: '/blog' as const },
+  { label: 'Pricing', to: '/buy' as const },
 ];
 
 const footLink = {

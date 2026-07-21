@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { AnimatedSection } from './AnimatedSection';
 import { BUY_URL } from '../config/site';
 
@@ -47,6 +48,16 @@ export function SupportBanner() {
               Get Hunt Showdown Cheats Now
             </a>
           </div>
+
+          <p style={{
+            fontFamily: 'var(--font-body)',
+            fontSize: '0.8125rem',
+            color: 'var(--text-muted)',
+            marginTop: '20px',
+            lineHeight: 1.65,
+          }}>
+            View full feature list on our <Link to="/buy" style={{ color: 'var(--accent)', textDecoration: 'none' }}>Hunt Showdown Cheats pricing page</Link> or read our <Link to="/blog" style={{ color: 'var(--accent)', textDecoration: 'none' }}>ESP, aimbot and DMA guides</Link>.
+          </p>
         </div>
       </section>
     </AnimatedSection>
