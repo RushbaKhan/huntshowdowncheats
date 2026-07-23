@@ -1,5 +1,5 @@
 import { AnimatedSection } from './AnimatedSection';
-import { BUY_URL, VIDEO_URL } from '../config/site';
+import { BUY_URL } from '../config/site';
 import { useInViewOnce } from '../hooks/useInViewOnce';
 
 function PixelAvatar({ seed, size = 52 }: { seed: number; size?: number }) {
@@ -197,26 +197,6 @@ function ReviewsIntro() {
   );
 }
 
-function LoopVideo({ label }: { label: string }) {
-  return (
-    <video
-      autoPlay
-      loop
-      muted
-      playsInline
-      preload="metadata"
-      aria-label={label}
-      style={{
-        width: '100%',
-        height: 'auto',
-        display: 'block',
-      }}
-    >
-      <source src={VIDEO_URL} type="video/mp4" />
-    </video>
-  );
-}
-
 export function Testimonials() {
   const padX = {
     paddingLeft: 'max(16px, env(safe-area-inset-left), 4vw)',
@@ -228,16 +208,6 @@ export function Testimonials() {
       <AnimatedSection>
         <ReviewsIntro />
       </AnimatedSection>
-
-      <div style={{
-        marginTop: '48px',
-        marginBottom: '48px',
-        borderRadius: 'var(--radius-lg)',
-        overflow: 'hidden',
-        border: '1px solid var(--border-ghost)',
-      }}>
-        <LoopVideo label="Hunt Showdown cheats ESP aimbot gameplay demo" />
-      </div>
 
       <div className="review-ticker-mask" style={{ position: 'relative', overflow: 'hidden', marginBottom: '24px' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>

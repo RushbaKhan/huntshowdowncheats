@@ -1,5 +1,5 @@
 import { ScreenshotSlider } from './ScreenshotSlider';
-import { BUY_URL, VIDEO_URL } from '../config/site';
+import { BUY_URL } from '../config/site';
 
 export function HeroSection() {
   return (
@@ -104,7 +104,7 @@ export function HeroSection() {
           maxWidth: '700px',
         }}>
           Hunt Showdown Cheats.{' '}
-          <span className="gradient-text">Dominate Every Hunt</span>
+          <span className="gradient-text">Dominate every Hunt with ESP, Aimbot and more</span>
         </h1>
 
         <p style={{
@@ -158,25 +158,6 @@ export function HeroSection() {
         }}>
           Windows 10 & 11 · Easy Anti-Cheat · Stream-Proof Mode · Cloud-DMA Option
         </p>
-
-        <div style={{
-          maxWidth: '520px',
-          borderRadius: 'var(--radius-lg)',
-          overflow: 'hidden',
-          border: '1px solid var(--border-ghost)',
-        }}>
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
-            aria-label="Hunt Showdown cheats ESP aimbot demo video"
-            style={{ width: '100%', height: 'auto', display: 'block' }}
-          >
-            <source src={VIDEO_URL} type="video/mp4" />
-          </video>
-        </div>
 
         <div style={{
           position: 'absolute',

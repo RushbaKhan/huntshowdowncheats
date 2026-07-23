@@ -9,7 +9,7 @@ export const STATIC_ROUTES = [
     title: 'Hunt Showdown Cheats – Aimbot, ESP, Wallhack & Triggerbot | huntshowdowncheats.com',
     description:
       'Undetected Hunt Showdown cheats with aimbot, ESP, wallhack, triggerbot, radar and DMA. See hunters through walls, silent aim, recoil control, stream-proof mode. Updated every patch. Windows 10 & 11.',
-    h1: 'Hunt Showdown Cheats – Undetected Aimbot, ESP, Wallhack & Triggerbot',
+    h1: 'Hunt Showdown Cheats. Dominate every Hunt with ESP, Aimbot and more',
     priority: '1.0',
     changefreq: 'weekly',
     type: 'website',
