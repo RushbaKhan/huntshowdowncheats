@@ -13,6 +13,7 @@ import {
   BUY_DESCRIPTION,
   BUY_TITLE,
   HOME_DESCRIPTION,
+  HOME_FAQ_ITEMS,
   HOME_TITLE,
   STORE_FAQ_ITEMS,
   absoluteUrl,
@@ -21,6 +22,8 @@ import {
   organizationSchema,
   productSchema,
   softwareApplicationSchema,
+  videoObjectSchema,
+  webPageSchema,
 } from './config/seo';
 import './globals.css';
 
@@ -133,7 +136,10 @@ function RouteSeo() {
       description={HOME_DESCRIPTION}
       path="/"
       structuredData={[
+        webPageSchema('/', HOME_TITLE, HOME_DESCRIPTION),
         softwareApplicationSchema(),
+        faqPageSchema(HOME_FAQ_ITEMS),
+        videoObjectSchema(),
         breadcrumbSchema([{ name: 'Home', path: '/' }]),
       ]}
     />

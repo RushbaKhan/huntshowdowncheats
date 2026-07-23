@@ -21,6 +21,33 @@ export const BLOG_TITLE =
 export const BLOG_DESCRIPTION =
   'Expert guides on Hunt Showdown ESP, aimbot setup, triggerbot, wallhack, radar, DMA and ban protection. Updated after every Crytek patch.';
 
+export const HOME_FAQ_ITEMS = [
+  {
+    q: 'What are Hunt Showdown cheats?',
+    a: 'Hunt Showdown cheats are external tools that add aimbot, ESP, wallhack, triggerbot, radar and DMA features to Hunt Showdown. Our package is undetected, updated after every Crytek patch, and includes stream-proof mode.',
+  },
+  {
+    q: 'Are Hunt Showdown cheats undetected?',
+    a: 'Yes. Our Hunt Showdown cheat runs externally without injection, which keeps it undetected against Easy Anti-Cheat. We push updates within hours of every game patch.',
+  },
+  {
+    q: 'Does Hunt Showdown ESP work through walls?',
+    a: 'Yes. Hunt Showdown ESP shows enemy hunters, loot, bosses and extract points through all walls and structures. You can adjust range, colors and what information is displayed.',
+  },
+  {
+    q: 'What is included in Hunt Showdown aimbot?',
+    a: 'Hunt Showdown aimbot includes bone selector, FOV circle, smoothing, visibility check, silent aim, recoil control and triggerbot. All settings are adjustable for natural-looking gameplay.',
+  },
+  {
+    q: 'Do you support Hunt Showdown DMA?',
+    a: 'Yes. We offer a Cloud-DMA option for hardware-level memory reading — the safest profile for long-term Hunt Showdown cheat use on Windows 10 and 11.',
+  },
+  {
+    q: 'How fast are updates after a Hunt Showdown patch?',
+    a: 'After every Crytek patch, download the updated loader from your order page. Updates typically release within hours so your Hunt Showdown cheats stay aligned with the live game client.',
+  },
+] as const;
+
 export const STORE_FAQ_ITEMS = [
   {
     q: 'Can I use my Hunt Showdown cheat license on more than one PC?',
@@ -123,6 +150,34 @@ export function faqPageSchema(items: readonly { q: string; a: string }[]) {
         text: item.a,
       },
     })),
+  };
+}
+
+export function webPageSchema(path: string, name: string, description: string) {
+  return {
+    '@type': 'WebPage',
+    '@id': `${absoluteUrl(path)}#webpage`,
+    url: absoluteUrl(path),
+    name,
+    description,
+    isPartOf: {
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    publisher: organizationSchema(),
+  };
+}
+
+export function videoObjectSchema() {
+  return {
+    '@type': 'VideoObject',
+    name: 'Hunt Showdown Cheats ESP Aimbot Demo',
+    description: 'Gameplay demo showing Hunt Showdown ESP, aimbot, wallhack and triggerbot features.',
+    thumbnailUrl: DEFAULT_OG_IMAGE,
+    uploadDate: '2026-06-01',
+    contentUrl: 'https://bryjchknhsrmjdunnfer.supabase.co/storage/v1/object/public/575/0510(3).mp4',
   };
 }
 
