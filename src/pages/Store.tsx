@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { AnimatedSection } from '../components/AnimatedSection';
+import { FaqSection } from '../components/FaqSection';
 import { ScreenshotSlider } from '../components/ScreenshotSlider';
 import { STORE_FAQ_ITEMS } from '../config/seo';
 import { BUY_URL, VIDEO_URL } from '../config/site';
@@ -33,60 +33,6 @@ const generalFeatures = [
 ];
 
 const faqs = [...STORE_FAQ_ITEMS];
-
-function FaqItem({ q, a }: { q: string; a: string }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div style={{
-      borderBottom: '1px solid var(--border-ghost)',
-    }}>
-      <button
-        onClick={() => setOpen(v => !v)}
-        style={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          padding: '20px 0',
-          background: 'transparent',
-          border: 'none',
-          cursor: 'pointer',
-          textAlign: 'left',
-          gap: '16px',
-        }}
-      >
-        <span style={{
-          fontFamily: 'var(--font-body)',
-          fontSize: '0.9375rem',
-          fontWeight: 600,
-          color: 'var(--text-primary)',
-          lineHeight: 1.4,
-        }}>{q}</span>
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="var(--accent)"
-          strokeWidth="2"
-          style={{ flexShrink: 0, transform: open ? 'rotate(45deg)' : 'none', transition: 'transform 0.2s' }}
-        >
-          <line x1="12" y1="5" x2="12" y2="19" />
-          <line x1="5" y1="12" x2="19" y2="12" />
-        </svg>
-      </button>
-      {open && (
-        <p style={{
-          fontFamily: 'var(--font-body)',
-          fontSize: '0.875rem',
-          color: 'var(--text-secondary)',
-          lineHeight: 1.7,
-          paddingBottom: '20px',
-        }}>{a}</p>
-      )}
-    </div>
-  );
-}
 
 export function StorePage() {
   return (
@@ -467,29 +413,11 @@ export function StorePage() {
 
       {/* FAQ */}
       <AnimatedSection>
-        <section style={{
-          background: 'var(--bg-deep)',
-          padding: 'clamp(60px, 8vw, 100px) max(16px, 4vw)',
-        }}>
-          <div style={{ maxWidth: 800, margin: '0 auto' }}>
-            <h2 style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
-              fontWeight: 800,
-              color: 'var(--text-primary)',
-              marginBottom: '16px',
-            }}>Hunt Showdown Cheats FAQ</h2>
-            <p style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: '0.95rem',
-              color: 'var(--text-secondary)',
-              marginBottom: '40px',
-            }}>Common questions about our Hunt Showdown aimbot, ESP, triggerbot, and wallhack.</p>
-            <div>
-              {faqs.map(faq => <FaqItem key={faq.q} q={faq.q} a={faq.a} />)}
-            </div>
-          </div>
-        </section>
+        <FaqSection
+          title="Hunt Showdown Cheats FAQ"
+          subtitle="Common questions about our Hunt Showdown aimbot, ESP, triggerbot, and wallhack."
+          items={faqs}
+        />
       </AnimatedSection>
     </>
   );

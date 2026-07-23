@@ -7,6 +7,13 @@ const NAV = [
   { label: 'Pricing', to: '/buy' as const },
 ];
 
+const SEO_GUIDES = [
+  { label: 'Hunt Showdown ESP Guide', to: '/blog/huntshowdown-esp-guide' as const },
+  { label: 'Hunt Showdown Aimbot Setup', to: '/blog/huntshowdown-aimbot-setup' as const },
+  { label: 'Hunt Showdown DMA Guide', to: '/blog/huntshowdown-dma-guide' as const },
+  { label: 'Undetected Hunt Showdown Cheats', to: '/blog/undetected-huntshowdown-cheats' as const },
+];
+
 const footLink = {
   color: 'var(--text-muted)',
   textDecoration: 'none',
@@ -61,7 +68,7 @@ export function Footer() {
               maxWidth: '320px',
               margin: 0,
             }}>
-              Hunt Showdown cheats — aimbot, ESP, triggerbot, radar, and wallhack. Updated after every patch.
+              Undetected Hunt Showdown cheats — aimbot, ESP, wallhack, triggerbot, radar and DMA. Updated after every patch.
             </p>
           </div>
 
@@ -100,9 +107,34 @@ export function Footer() {
           </nav>
         </div>
 
+        <nav
+          aria-label="Hunt Showdown cheat guides"
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '10px 18px',
+            paddingBottom: '20px',
+            borderBottom: '1px solid var(--border-ghost)',
+            marginBottom: '16px',
+            fontFamily: 'var(--font-body)',
+            fontSize: '0.75rem',
+          }}
+        >
+          {SEO_GUIDES.map(({ label, to }) => (
+            <Link
+              key={to}
+              to={to}
+              style={{ ...footLink, fontSize: '0.75rem' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-secondary)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-muted)'; }}
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+
         <div style={{
-          borderTop: '1px solid var(--border-ghost)',
-          padding: '16px 0 20px',
+          padding: '0 0 20px',
           display: 'flex',
           flexWrap: 'wrap',
           justifyContent: 'space-between',

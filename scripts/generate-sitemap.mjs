@@ -1,51 +1,65 @@
 import { writeFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { BLOG_SLUGS, SITE_URL, STATIC_ROUTES } from './seo-data.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
-const siteUrl = 'https://huntshowdowncheats.com';
 const today = new Date().toISOString().slice(0, 10);
 
-const blogSlugs = [
-  { slug: 'huntshowdown-esp-guide', lastmod: '2026-06-20', priority: '0.8' },
-  { slug: 'huntshowdown-aimbot-setup', lastmod: '2026-06-18', priority: '0.8' },
-  { slug: 'huntshowdown-triggerbot-guide', lastmod: '2026-06-15', priority: '0.7' },
-  { slug: 'huntshowdown-radar-guide', lastmod: '2026-07-11', priority: '0.7' },
-  { slug: 'huntshowdown-wallhack-guide', lastmod: '2026-06-12', priority: '0.7' },
-  { slug: 'huntshowdown-dma-guide', lastmod: '2026-07-15', priority: '0.8' },
-  { slug: 'best-huntshowdown-cheats-2026', lastmod: '2026-06-10', priority: '0.9' },
-  { slug: 'huntshowdown-anticheat-analysis', lastmod: '2026-06-08', priority: '0.7' },
-  { slug: 'undetected-huntshowdown-cheats', lastmod: '2026-06-05', priority: '0.8' },
-  { slug: 'huntshowdown-cheats-smart-buying', lastmod: '2026-06-03', priority: '0.7' },
-  { slug: 'huntshowdown-recoil-control', lastmod: '2026-07-01', priority: '0.7' },
-  { slug: 'huntshowdown-stream-proof-mode', lastmod: '2026-07-18', priority: '0.7' },
-];
+function parseBlogPosts() {
+  const source = readFileSync(join(root, 'src/data/blogPosts.ts'), 'utf8');
+  const posts = [];
+  const blockRe = /slug:\s*'([^']+)'[\s\S]*?title:\s*"([^"]+)"[\s\S]*?excerpt:\s*"([^"]+)"[\s\S]*?image:\s*"([^"]+)"/g;
+  let match;
+  while ((match = blockRe.exec(source)) !== null) {
+    posts.push({ slug: match[1], title: match[2], excerpt: match[3], image: match[4] });
+  }
+  return posts;
+}
 
-function urlEntry(loc, lastmod, changefreq, priority) {
+const blogPosts = parseBlogPosts();
+const blogBySlug = Object.fromEntries(blogPosts.map(p => [p.slug, p]));
+
+function urlEntry(loc, lastmod, changefreq, priority, image) {
+  const imageBlock = image
+    ? `
+    <image:image>
+      <image:loc>${SITE_URL}${image.startsWith('/') ? image : `/${image}`}</image:loc>
+      <image:title>${loc.split('/').pop()?.replace(/-/g, ' ') ?? 'Hunt Showdown Cheats'}</image:title>
+    </image:image>`
+    : '';
   return `  <url>
     <loc>${loc}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>${changefreq}</changefreq>
-    <priority>${priority}</priority>
+    <priority>${priority}</priority>${imageBlock}
   </url>`;
 }
 
-const staticPages = [
-  urlEntry(`${siteUrl}/`, today, 'weekly', '1.0'),
-  urlEntry(`${siteUrl}/blog`, today, 'weekly', '0.9'),
-  urlEntry(`${siteUrl}/buy`, today, 'weekly', '0.95'),
-  ...blogSlugs.map(({ slug, lastmod, priority }) =>
-    urlEntry(`${siteUrl}/blog/${slug}`, lastmod, 'monthly', priority)
-  ),
-];
+const staticPages = STATIC_ROUTES.map(route =>
+  urlEntry(`${SITE_URL}${route.path === '/' ? '/' : route.path}`, today, route.changefreq, route.priority, '/huntshowdown-cheats-esp-screenshot-1.png')
+);
+
+const blogPages = BLOG_SLUGS.map(({ slug, lastmod, priority }) => {
+  const post = blogBySlug[slug];
+  return urlEntry(
+    `${SITE_URL}/blog/${slug}`,
+    lastmod,
+    'monthly',
+    priority,
+    post?.image ?? '/huntshowdown-cheats-esp-screenshot-1.png'
+  );
+});
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-${staticPages.join('\n')}
+${[...staticPages, ...blogPages].join('\n')}
 </urlset>
 `;
 

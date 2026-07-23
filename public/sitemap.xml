@@ -1,96 +1,157 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   <url>
     <loc>https://huntshowdowncheats.com/</loc>
-    <lastmod>2026-07-21</lastmod>
+    <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://huntshowdowncheats.com/blog</loc>
-    <lastmod>2026-07-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://huntshowdowncheats.com/huntshowdown-cheats-esp-screenshot-1.png</image:loc>
+      <image:title></image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huntshowdowncheats.com/buy</loc>
-    <lastmod>2026-07-21</lastmod>
+    <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://huntshowdowncheats.com/huntshowdown-cheats-esp-screenshot-1.png</image:loc>
+      <image:title>buy</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://huntshowdowncheats.com/blog</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://huntshowdowncheats.com/huntshowdown-cheats-esp-screenshot-1.png</image:loc>
+      <image:title>blog</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huntshowdowncheats.com/blog/huntshowdown-esp-guide</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://huntshowdowncheats.com/huntshowdown-cheats-esp-screenshot-2.png</image:loc>
+      <image:title>huntshowdown esp guide</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huntshowdowncheats.com/blog/huntshowdown-aimbot-setup</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://huntshowdowncheats.com/huntshowdown-cheats-esp-screenshot-1.png</image:loc>
+      <image:title>huntshowdown aimbot setup</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huntshowdowncheats.com/blog/huntshowdown-triggerbot-guide</loc>
     <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://huntshowdowncheats.com/huntshowdown-cheats-esp-screenshot-2.png</image:loc>
+      <image:title>huntshowdown triggerbot guide</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huntshowdowncheats.com/blog/huntshowdown-radar-guide</loc>
     <lastmod>2026-07-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://huntshowdowncheats.com/huntshowdown-cheats-esp-screenshot-1.png</image:loc>
+      <image:title>huntshowdown radar guide</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huntshowdowncheats.com/blog/huntshowdown-wallhack-guide</loc>
     <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://huntshowdowncheats.com/huntshowdown-cheats-esp-screenshot-1.png</image:loc>
+      <image:title>huntshowdown wallhack guide</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huntshowdowncheats.com/blog/huntshowdown-dma-guide</loc>
     <lastmod>2026-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://huntshowdowncheats.com/huntshowdown-cheats-esp-screenshot-1.png</image:loc>
+      <image:title>huntshowdown dma guide</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huntshowdowncheats.com/blog/best-huntshowdown-cheats-2026</loc>
     <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://huntshowdowncheats.com/huntshowdown-cheats-esp-screenshot-1.png</image:loc>
+      <image:title>best huntshowdown cheats 2026</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huntshowdowncheats.com/blog/huntshowdown-anticheat-analysis</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://huntshowdowncheats.com/huntshowdown-cheats-esp-screenshot-1.png</image:loc>
+      <image:title>huntshowdown anticheat analysis</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huntshowdowncheats.com/blog/undetected-huntshowdown-cheats</loc>
     <lastmod>2026-06-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://huntshowdowncheats.com/huntshowdown-cheats-esp-screenshot-1.png</image:loc>
+      <image:title>undetected huntshowdown cheats</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huntshowdowncheats.com/blog/huntshowdown-cheats-smart-buying</loc>
     <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://huntshowdowncheats.com/huntshowdown-cheats-esp-screenshot-1.png</image:loc>
+      <image:title>huntshowdown cheats smart buying</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huntshowdowncheats.com/blog/huntshowdown-recoil-control</loc>
     <lastmod>2026-07-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://huntshowdowncheats.com/huntshowdown-cheats-esp-screenshot-1.png</image:loc>
+      <image:title>huntshowdown recoil control</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huntshowdowncheats.com/blog/huntshowdown-stream-proof-mode</loc>
     <lastmod>2026-07-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://huntshowdowncheats.com/huntshowdown-cheats-esp-screenshot-1.png</image:loc>
+      <image:title>huntshowdown stream proof mode</image:title>
+    </image:image>
   </url>
 </urlset>
