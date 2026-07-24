@@ -102,7 +102,7 @@ function RouteSeo() {
       }
       return (
         <Seo
-          title={`${post.title} | Hunt Showdown Cheats Blog`}
+          title={`${post.title} | Hunt Cheats Blog`}
           description={post.excerpt}
           path={canonicalPath}
           image={post.image}

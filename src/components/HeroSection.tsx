@@ -14,6 +14,7 @@ export function HeroSection() {
     }}>
       <ScreenshotSlider
         interval={4000}
+        priority="high"
         style={{
           position: 'absolute',
           top: 0,

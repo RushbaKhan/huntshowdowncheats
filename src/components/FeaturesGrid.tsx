@@ -214,7 +214,7 @@ export function FeaturesGrid() {
                 border: '1px solid var(--border-ghost)',
                 overflow: 'hidden',
               }}>
-                <video autoPlay loop muted playsInline preload="metadata" aria-label="Hunt Showdown cheats aimbot ESP video" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', minHeight: '220px' }}>
+                <video autoPlay loop muted playsInline preload="none" aria-label="Hunt Showdown cheats aimbot ESP video" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', minHeight: '220px' }}>
                   <source src={VIDEO_URL} type="video/mp4" />
                 </video>
               </div>

@@ -80,6 +80,9 @@ export function Seo({
       name: 'twitter:image:alt',
       content: 'Hunt Showdown Cheats – Aimbot, ESP, Wallhack and Triggerbot',
     });
+    upsertLink('link[rel="alternate"][hreflang="en"]', { rel: 'alternate', hreflang: 'en', href: `${SITE_URL}${path === '/' ? '/' : path}` });
+    upsertLink('link[rel="alternate"][hreflang="x-default"]', { rel: 'alternate', hreflang: 'x-default', href: `${SITE_URL}${path === '/' ? '/' : path}` });
+    upsertMeta('meta[property="og:image:alt"]', { property: 'og:image:alt', content: 'Hunt Showdown cheats ESP and aimbot screenshot' });
     upsertLink('link[rel="canonical"]', { rel: 'canonical', href: canonicalUrl });
     upsertMeta('meta[property="og:type"]', { property: 'og:type', content: type });
     upsertMeta('meta[property="og:url"]', { property: 'og:url', content: canonicalUrl });

@@ -98,7 +98,7 @@ export function SafetySection() {
                 loop
                 muted
                 playsInline
-                preload="metadata"
+                preload="none"
                 aria-label="Hunt Showdown cheats ESP aimbot demo video"
                 style={{ width: '100%', height: 'auto', display: 'block' }}
               >

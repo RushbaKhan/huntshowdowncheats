@@ -1,51 +1,40 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { SCREENSHOTS, VIDEO_URL } from '../config/site';
 
 interface ScreenshotSliderProps {
   interval?: number;
   style?: React.CSSProperties;
   imgStyle?: React.CSSProperties;
+  priority?: 'high' | 'low';
 }
 
 const VIDEO_FRAME_TIMES = [2.5, 7.5];
 
 function VideoFrameSlide({
-  time,
   active,
   prev,
   index,
   imgStyle,
 }: {
-  time: number;
   active: boolean;
   prev: boolean;
   index: number;
   imgStyle?: React.CSSProperties;
 }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [loaded, setLoaded] = useState(active || prev);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    if (active || prev) setLoaded(true);
+  }, [active, prev]);
 
-    const seek = () => {
-      if (video.duration && time <= video.duration) {
-        video.currentTime = time;
-      }
-    };
-
-    video.addEventListener('loadedmetadata', seek);
-    if (video.readyState >= 1) seek();
-    return () => video.removeEventListener('loadedmetadata', seek);
-  }, [time]);
+  if (!loaded) return null;
 
   return (
     <video
-      ref={videoRef}
       src={VIDEO_URL}
       muted
       playsInline
-      preload="metadata"
+      preload="none"
       aria-label={`Hunt Showdown cheats ESP aimbot screenshot ${index + 1}`}
       style={{
         position: index === 0 ? 'relative' : 'absolute',
@@ -66,11 +55,17 @@ function VideoFrameSlide({
   );
 }
 
-export function ScreenshotSlider({ interval = 3500, style, imgStyle }: ScreenshotSliderProps) {
+export function ScreenshotSlider({
+  interval = 3500,
+  style,
+  imgStyle,
+  priority = 'low',
+}: ScreenshotSliderProps) {
   const [active, setActive] = useState(0);
   const [prev, setPrev] = useState<number | null>(null);
   const [useVideoFrames, setUseVideoFrames] = useState(false);
   const slideCount = useVideoFrames ? VIDEO_FRAME_TIMES.length : SCREENSHOTS.length;
+  const isHighPriority = priority === 'high';
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -85,42 +80,54 @@ export function ScreenshotSlider({ interval = 3500, style, imgStyle }: Screensho
   return (
     <div style={{ position: 'relative', overflow: 'hidden', ...style }}>
       {useVideoFrames
-        ? VIDEO_FRAME_TIMES.map((time, i) => (
-            <VideoFrameSlide
-              key={`frame-${time}`}
-              time={time}
-              index={i}
-              active={i === active}
-              prev={i === prev}
-              imgStyle={imgStyle}
-            />
-          ))
-        : SCREENSHOTS.map((src, i) => (
-            <img
-              key={src}
-              src={src}
-              alt={`Hunt Showdown cheats ESP aimbot screenshot ${i + 1}`}
-              width={1920}
-              height={1080}
-              loading={i === 0 ? 'eager' : 'lazy'}
-              fetchPriority={i === 0 ? 'high' : undefined}
-              onError={() => setUseVideoFrames(true)}
-              style={{
-                position: i === 0 ? 'relative' : 'absolute',
-                inset: 0,
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                transition: 'opacity 0.9s ease',
-                opacity: i === active ? 1 : 0,
-                zIndex: i === active ? 2 : i === prev ? 1 : 0,
-                display: 'block',
-                ...imgStyle,
-              }}
-            />
-          ))}
+        ? VIDEO_FRAME_TIMES.map((time, i) => {
+            const isActive = i === active;
+            const isPrev = i === prev;
+            if (!isActive && !isPrev) return null;
+            return (
+              <VideoFrameSlide
+                key={`frame-${time}`}
+                index={i}
+                active={isActive}
+                prev={isPrev}
+                imgStyle={imgStyle}
+              />
+            );
+          })
+        : SCREENSHOTS.map((src, i) => {
+            const isActive = i === active;
+            const isPrev = i === prev;
+            if (!isActive && !isPrev) return null;
+
+            return (
+              <img
+                key={src}
+                src={src}
+                alt={`Hunt Showdown cheats ESP aimbot screenshot ${i + 1}`}
+                title={`Hunt Showdown cheats ESP aimbot screenshot ${i + 1}`}
+                width={1920}
+                height={1080}
+                loading={isHighPriority && i === 0 ? 'eager' : 'lazy'}
+                fetchPriority={isHighPriority && i === 0 ? 'high' : undefined}
+                decoding="async"
+                onError={() => setUseVideoFrames(true)}
+                style={{
+                  position: i === 0 ? 'relative' : 'absolute',
+                  inset: 0,
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  transition: 'opacity 0.9s ease',
+                  opacity: isActive ? 1 : 0,
+                  zIndex: isActive ? 2 : isPrev ? 1 : 0,
+                  display: 'block',
+                  ...imgStyle,
+                }}
+              />
+            );
+          })}
 
       <div style={{
         position: 'absolute',
