@@ -4,19 +4,19 @@ export const SEO_KEYWORDS =
   'hunt showdown cheats, huntshowdown cheats, hunt cheats, hunt showdown aimbot, huntshowdown aimbot, hunt showdown esp, huntshowdown esp, hunt showdown triggerbot, huntshowdown triggerbot, hunt esp, hunt aimbot, hunt showdown wallhack, hunt showdown hack, hunt showdown radar, hunt showdown dma, undetected hunt showdown cheats, best hunt showdown cheats';
 
 export const HOME_TITLE =
-  'Hunt Showdown Cheats – Aimbot, ESP, Wallhack & Triggerbot | huntshowdowncheats.com';
+  'Hunt Showdown Cheats – Aimbot, ESP & Wallhack';
 
 export const HOME_DESCRIPTION =
   'Undetected Hunt Showdown cheats with aimbot, ESP, wallhack, triggerbot, radar and DMA. See hunters through walls, silent aim, recoil control, stream-proof mode. Updated every patch. Windows 10 & 11.';
 
 export const BUY_TITLE =
-  'Get Hunt Showdown Cheats – Aimbot, ESP, Triggerbot, Radar & DMA | $40/month';
+  'Get Hunt Showdown Cheats – Aimbot, ESP & Radar';
 
 export const BUY_DESCRIPTION =
   'Get undetected Hunt Showdown cheats. Includes aimbot, ESP, wallhack, triggerbot, radar, DMA, recoil control, silent aim and stream-proof mode. Instant access after checkout.';
 
 export const BLOG_TITLE =
-  'Hunt Showdown Cheats Blog – ESP, Aimbot, DMA & Triggerbot Guides';
+  'Hunt Showdown Cheats Blog – ESP & Aimbot Guides';
 
 export const BLOG_DESCRIPTION =
   'Expert guides on Hunt Showdown ESP, aimbot setup, triggerbot, wallhack, radar, DMA and ban protection. Updated after every Crytek patch.';

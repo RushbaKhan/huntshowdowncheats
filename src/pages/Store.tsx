@@ -397,7 +397,7 @@ export function StorePage() {
               loop
               muted
               playsInline
-              preload="metadata"
+              preload="none"
               aria-label="Hunt Showdown cheats ESP wallhack aimbot demo video"
               style={{
                 width: '100%',

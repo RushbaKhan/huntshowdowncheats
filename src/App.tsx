@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
+import { SmoothScroll } from './components/SmoothScroll';
 import { HomePage } from './pages/Home';
 import { StorePage } from './pages/Store';
 import { BLOG_POSTS, BlogListPage, BlogPostPage } from './pages/Blog';
@@ -101,7 +102,7 @@ function RouteSeo() {
       }
       return (
         <Seo
-          title={`${post.title} | Hunt Showdown Cheats Blog`}
+          title={`${post.title} | Hunt Cheats Blog`}
           description={post.excerpt}
           path={canonicalPath}
           image={post.image}
@@ -148,18 +149,20 @@ function RouteSeo() {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <I18nProvider>
-        <RouteSeo />
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/buy" element={<StorePage />} />
-          <Route path="/blog" element={<BlogListPage />} />
-          <Route path="/blog/:slug" element={<BlogPostPage />} />
-        </Routes>
-        <Footer />
-      </I18nProvider>
-    </BrowserRouter>
+    <SmoothScroll>
+      <BrowserRouter>
+        <I18nProvider>
+          <RouteSeo />
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/buy" element={<StorePage />} />
+            <Route path="/blog" element={<BlogListPage />} />
+            <Route path="/blog/:slug" element={<BlogPostPage />} />
+          </Routes>
+          <Footer />
+        </I18nProvider>
+      </BrowserRouter>
+    </SmoothScroll>
   );
 }

@@ -1,6 +1,8 @@
-import { AnimatedSection } from './AnimatedSection';
+import { useEffect, useRef, useState } from 'react';
 import { BUY_URL } from '../config/site';
-import { useInViewOnce } from '../hooks/useInViewOnce';
+import { useMediaQuery } from '../hooks/useMediaQuery';
+
+const MOBILE_MQ = '(max-width: 768px)';
 
 function PixelAvatar({ seed, size = 52 }: { seed: number; size?: number }) {
   const palettes = [
@@ -68,37 +70,16 @@ function StarRating() {
   );
 }
 
-function ReviewCard({
-  review,
-  idx,
-  visible = true,
-  popDelay = 0,
-  layout = 'ticker',
-}: {
-  review: (typeof reviews)[number];
-  idx: number;
-  visible?: boolean;
-  popDelay?: number;
-  layout?: 'ticker' | 'grid';
-}) {
-  const cardClass =
-    layout === 'grid'
-      ? visible
-        ? 'review-card-pop'
-        : 'review-card-hidden'
-      : 'review-card-static';
-
+function ReviewCard({ review, idx }: { review: (typeof reviews)[number]; idx: number }) {
   return (
     <div
-      className={cardClass}
+      className="review-stack-card"
       style={{
         borderRadius: 'var(--radius-lg)',
         padding: 'clamp(18px, 2.5vw, 24px)',
         background: 'var(--bg-surface)',
         border: '1px solid var(--border-dim)',
-        width: layout === 'grid' ? '100%' : '320px',
-        flexShrink: 0,
-        animationDelay: layout === 'grid' && visible ? `${popDelay}s` : undefined,
+        width: '100%',
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
@@ -124,45 +105,9 @@ function ReviewCard({
   );
 }
 
-function PopReviewCard({
-  review,
-  idx,
-  popDelay = 0,
-}: {
-  review: (typeof reviews)[number];
-  idx: number;
-  popDelay?: number;
-}) {
-  const { ref, visible } = useInViewOnce(0.12);
-  return (
-    <div ref={ref} style={{ minWidth: 0 }}>
-      <ReviewCard review={review} idx={idx} visible={visible} popDelay={popDelay} layout="grid" />
-    </div>
-  );
-}
-
-function ReviewTickerRow({ reverse = false }: { reverse?: boolean }) {
-  const doubled = [...reviews, ...reviews];
-  return (
-    <div
-      className="review-ticker-row"
-      style={{
-        display: 'flex',
-        gap: '16px',
-        animation: reverse ? 'ticker-reverse 40s linear infinite' : 'ticker 40s linear infinite',
-        width: 'max-content',
-      }}
-    >
-      {doubled.map((review, i) => (
-        <ReviewCard key={`${review.name}-${i}`} review={review} idx={i % reviews.length} layout="ticker" />
-      ))}
-    </div>
-  );
-}
-
 function ReviewsIntro() {
   return (
-    <div style={{ marginBottom: 'clamp(32px, 5vw, 48px)' }}>
+    <div>
       <span className="section-label" style={{ marginBottom: '16px', display: 'flex' }}>Happy Clients</span>
       <h2 style={{
         fontFamily: 'var(--font-display)',
@@ -198,35 +143,152 @@ function ReviewsIntro() {
 }
 
 export function Testimonials() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [progress, setProgress] = useState(() => reviews.map(() => 0));
+  const [cardGap, setCardGap] = useState(38);
+  const isMobile = useMediaQuery(MOBILE_MQ);
+
   const padX = {
     paddingLeft: 'max(16px, env(safe-area-inset-left), 4vw)',
     paddingRight: 'max(16px, env(safe-area-inset-right), 4vw)',
   } as const;
 
-  return (
-    <section style={{ background: 'var(--bg-base)', padding: 'clamp(60px, 8vw, 100px) 0', ...padX }}>
-      <AnimatedSection>
-        <ReviewsIntro />
-      </AnimatedSection>
+  useEffect(() => {
+    if (isMobile) return;
 
-      <div className="review-ticker-mask" style={{ position: 'relative', overflow: 'hidden', marginBottom: '24px' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <ReviewTickerRow />
-          <ReviewTickerRow reverse />
+    function updateGap() {
+      const available = window.innerHeight - 280;
+      setCardGap(Math.min(38, Math.max(26, Math.floor(available / (reviews.length - 1)))));
+    }
+
+    updateGap();
+    window.addEventListener('resize', updateGap);
+    return () => window.removeEventListener('resize', updateGap);
+  }, [isMobile]);
+
+  useEffect(() => {
+    if (isMobile) return;
+
+    const section = sectionRef.current;
+    if (!section) return;
+
+    function onScroll() {
+      if (!section) return;
+      const rect = section.getBoundingClientRect();
+      const scrollRange = section.scrollHeight - window.innerHeight;
+      if (scrollRange <= 0) return;
+
+      const scrolled = Math.max(0, -rect.top);
+      const step = scrollRange / (reviews.length + 1);
+
+      setProgress(
+        reviews.map((_, index) => {
+          const start = index * step;
+          return Math.min(1, Math.max(0, (scrolled - start) / step));
+        })
+      );
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [isMobile]);
+
+  if (isMobile) {
+    return (
+      <section id="reviews" style={{ background: 'var(--bg-deep)', position: 'relative', paddingTop: 'clamp(48px, 10vw, 72px)', paddingBottom: 'clamp(48px, 10vw, 72px)', ...padX }}>
+        <div style={{ maxWidth: 640, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <ReviewsIntro />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+            {reviews.map((review, idx) => (
+              <ReviewCard key={review.name} review={review} idx={idx} />
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
+    );
+  }
 
-      <div
+  return (
+    <>
+      <style>{`
+        #reviews-right::-webkit-scrollbar { display: none; }
+        #reviews-right { -ms-overflow-style: none; scrollbar-width: none; }
+      `}</style>
+      <section
+        ref={sectionRef}
+        id="reviews"
         style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '16px',
+          background: 'var(--bg-deep)',
+          position: 'relative',
+          minHeight: `${(reviews.length + 2) * 30}vh`,
         }}
       >
-        {reviews.slice(0, 6).map((review, idx) => (
-          <PopReviewCard key={review.name} review={review} idx={idx} popDelay={idx * 0.08} />
-        ))}
-      </div>
-    </section>
+        <div
+          style={{
+            position: 'sticky',
+            top: 0,
+            height: 'min(100dvh, 100vh)',
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 'clamp(24px, 4vw, 64px)',
+            maxWidth: 1280,
+            margin: '0 auto',
+            alignItems: 'stretch',
+            overflow: 'clip',
+            ...padX,
+          }}
+        >
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignSelf: 'center', minWidth: 0 }}>
+            <ReviewsIntro />
+          </div>
+
+          <div
+            id="reviews-right"
+            style={{
+              position: 'relative',
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              overflow: 'hidden',
+              minWidth: 0,
+            }}
+          >
+            <div
+              style={{
+                position: 'relative',
+                width: '100%',
+                height: `${(reviews.length - 1) * cardGap + 190}px`,
+                flexShrink: 0,
+              }}
+            >
+              {reviews.map((review, index) => {
+                const cardProgress = progress[index];
+                const translateY = (1 - cardProgress) * 160;
+                const opacity = Math.min(1, cardProgress * 3);
+
+                return (
+                  <div
+                    key={review.name}
+                    style={{
+                      position: 'absolute',
+                      top: index * cardGap,
+                      left: 0,
+                      right: 0,
+                      transform: `translateY(${translateY}px)`,
+                      opacity,
+                      zIndex: index + 1,
+                      willChange: 'transform, opacity',
+                    }}
+                  >
+                    <ReviewCard review={review} idx={index} />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

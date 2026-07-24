@@ -67,12 +67,16 @@ function applyRouteMeta(html, route) {
     .replace(
       /<meta name="twitter:description" content="[^"]*"\s*\/?>/,
       `<meta name="twitter:description" content="${escapeHtml(route.description)}" />`
+    )
+    .replace(
+      /<meta property="og:image" content="[^"]*"\s*\/?>/,
+      `<meta property="og:image" content="${SITE_URL}/huntshowdown-cheats-esp-screenshot-1.png" />`
     );
 
   const noscript = `
     <noscript>
       <article style="max-width:760px;margin:2rem auto;padding:0 1rem;font-family:system-ui,sans-serif;color:#e8e8f0">
-        <h1>${escapeHtml(route.h1 ?? route.title)}</h1>
+        <p style="font-size:1.75rem;font-weight:800;line-height:1.1;margin-bottom:1rem">${escapeHtml(route.h1 ?? route.title)}</p>
         <p>${escapeHtml(route.description)}</p>
         ${route.excerpt ? `<p>${escapeHtml(route.excerpt)}</p>` : ''}
         <p><a href="${canonical}">Continue to ${escapeHtml(route.h1 ?? route.title)}</a></p>
@@ -104,7 +108,7 @@ for (const route of STATIC_ROUTES) {
 for (const post of parseBlogPosts()) {
   writeRouteHtml({
     path: `/blog/${post.slug}`,
-    title: `${post.title} | Hunt Showdown Cheats Blog`,
+    title: `${post.title} | Hunt Cheats Blog`,
     description: post.excerpt,
     h1: post.title,
     excerpt: post.excerpt,

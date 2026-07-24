@@ -6,17 +6,17 @@ export const SEO_KEYWORDS =
 export const STATIC_ROUTES = [
   {
     path: '/',
-    title: 'Hunt Showdown Cheats – Aimbot, ESP, Wallhack & Triggerbot | huntshowdowncheats.com',
+    title: 'Hunt Showdown Cheats – Aimbot, ESP & Wallhack',
     description:
       'Undetected Hunt Showdown cheats with aimbot, ESP, wallhack, triggerbot, radar and DMA. See hunters through walls, silent aim, recoil control, stream-proof mode. Updated every patch. Windows 10 & 11.',
-    h1: 'Hunt Showdown Cheats. Dominate every Hunt with ESP, Aimbot and more',
+    h1: 'Hunt Showdown Cheats. ESP, Aimbot and more',
     priority: '1.0',
     changefreq: 'weekly',
     type: 'website',
   },
   {
     path: '/buy',
-    title: 'Get Hunt Showdown Cheats – Aimbot, ESP, Triggerbot, Radar & DMA | $40/month',
+    title: 'Get Hunt Showdown Cheats – Aimbot, ESP & Radar',
     description:
       'Get undetected Hunt Showdown cheats. Includes aimbot, ESP, wallhack, triggerbot, radar, DMA, recoil control, silent aim and stream-proof mode. Instant access after checkout.',
     h1: 'Get Hunt Showdown Cheats – Aimbot, ESP, Triggerbot & Radar',
@@ -26,7 +26,7 @@ export const STATIC_ROUTES = [
   },
   {
     path: '/blog',
-    title: 'Hunt Showdown Cheats Blog – ESP, Aimbot, DMA & Triggerbot Guides',
+    title: 'Hunt Showdown Cheats Blog – ESP & Aimbot Guides',
     description:
       'Expert guides on Hunt Showdown ESP, aimbot setup, triggerbot, wallhack, radar, DMA and ban protection. Updated after every Crytek patch.',
     h1: 'Hunt Showdown Cheats Blog',

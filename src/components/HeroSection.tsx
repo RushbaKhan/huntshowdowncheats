@@ -14,6 +14,7 @@ export function HeroSection() {
     }}>
       <ScreenshotSlider
         interval={4000}
+        priority="high"
         style={{
           position: 'absolute',
           top: 0,
@@ -51,6 +52,30 @@ export function HeroSection() {
         borderRadius: '50%',
         background: 'radial-gradient(circle, rgba(168,85,247,0.18) 0%, rgba(124,58,237,0.08) 50%, transparent 70%)',
         animation: 'orb-drift 18s ease-in-out infinite',
+        zIndex: 4,
+        pointerEvents: 'none',
+      }} />
+      <div style={{
+        position: 'absolute',
+        bottom: '10%',
+        right: '-8%',
+        width: 'clamp(220px, 35vw, 480px)',
+        height: 'clamp(220px, 35vw, 480px)',
+        borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(124,58,237,0.14) 0%, rgba(168,85,247,0.06) 50%, transparent 70%)',
+        animation: 'orb-drift-2 22s ease-in-out infinite',
+        zIndex: 4,
+        pointerEvents: 'none',
+      }} />
+      <div style={{
+        position: 'absolute',
+        top: '45%',
+        right: '15%',
+        width: 'clamp(160px, 25vw, 320px)',
+        height: 'clamp(160px, 25vw, 320px)',
+        borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(192,132,252,0.1) 0%, transparent 70%)',
+        animation: 'orb-drift-3 26s ease-in-out infinite',
         zIndex: 4,
         pointerEvents: 'none',
       }} />
@@ -104,7 +129,7 @@ export function HeroSection() {
           maxWidth: '700px',
         }}>
           Hunt Showdown Cheats.{' '}
-          <span className="gradient-text">Dominate every Hunt with ESP, Aimbot and more</span>
+          <span className="gradient-text">ESP, Aimbot and more</span>
         </h1>
 
         <p style={{
