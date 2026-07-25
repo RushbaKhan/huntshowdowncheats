@@ -1,6 +1,9 @@
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
+/
+  Content-Type: text/html; charset=utf-8
+
 /huntshowdown-cheats-esp-screenshot-1.png
   Cache-Control: public, max-age=604800
 
