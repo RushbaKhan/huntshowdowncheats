@@ -2,6 +2,7 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { BLOG_SLUGS, SEO_KEYWORDS, SITE_URL, STATIC_ROUTES } from './seo-data.mjs';
+import { staticSeoBody } from './static-seo-content.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
@@ -26,9 +27,10 @@ function escapeHtml(value) {
     .replace(/"/g, '&quot;');
 }
 
-function applyRouteMeta(html, route) {
+function applyRouteMeta(html, route, blogPosts) {
   const canonical = `${SITE_URL}${route.path === '/' ? '/' : route.path}`;
   const ogType = route.type === 'article' ? 'article' : 'website';
+  const staticBody = staticSeoBody(route, blogPosts);
 
   let out = html
     .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(route.title)}</title>`)
@@ -43,6 +45,14 @@ function applyRouteMeta(html, route) {
     .replace(
       /<link rel="canonical" href="[^"]*"\s*\/?>/,
       `<link rel="canonical" href="${canonical}" />`
+    )
+    .replace(
+      /<link rel="alternate" hreflang="en" href="[^"]*"\s*\/?>/,
+      `<link rel="alternate" hreflang="en" href="${canonical}" />`
+    )
+    .replace(
+      /<link rel="alternate" hreflang="x-default" href="[^"]*"\s*\/?>/,
+      `<link rel="alternate" hreflang="x-default" href="${canonical}" />`
     )
     .replace(
       /<meta property="og:type" content="[^"]*"\s*\/?>/,
@@ -71,49 +81,43 @@ function applyRouteMeta(html, route) {
     .replace(
       /<meta property="og:image" content="[^"]*"\s*\/?>/,
       `<meta property="og:image" content="${SITE_URL}/huntshowdown-cheats-esp-screenshot-1.png" />`
-    );
+    )
+    .replace('<div id="root"></div>', `<div id="root">${staticBody}</div>`);
 
-  const noscript = `
-    <noscript>
-      <article style="max-width:760px;margin:2rem auto;padding:0 1rem;font-family:system-ui,sans-serif;color:#e8e8f0">
-        <p style="font-size:1.75rem;font-weight:800;line-height:1.1;margin-bottom:1rem">${escapeHtml(route.h1 ?? route.title)}</p>
-        <p>${escapeHtml(route.description)}</p>
-        ${route.excerpt ? `<p>${escapeHtml(route.excerpt)}</p>` : ''}
-        <p><a href="${canonical}">Continue to ${escapeHtml(route.h1 ?? route.title)}</a></p>
-      </article>
-    </noscript>`;
-
-  out = out.replace('</body>', `${noscript}\n  </body>`);
   return out;
 }
 
-function writeRouteHtml(route) {
+function writeRouteHtml(route, blogPosts) {
   const baseHtml = readFileSync(join(distDir, 'index.html'), 'utf8');
-  const html = applyRouteMeta(baseHtml, route);
+  const html = applyRouteMeta(baseHtml, route, blogPosts);
   const segments = route.path.split('/').filter(Boolean);
   const targetDir = segments.length ? join(distDir, ...segments) : distDir;
   mkdirSync(targetDir, { recursive: true });
   writeFileSync(join(targetDir, 'index.html'), html, 'utf8');
 }
 
+const blogPosts = parseBlogPosts();
 const baseHtml = readFileSync(join(distDir, 'index.html'), 'utf8');
 if (!baseHtml.includes('<div id="root"></div>')) {
   throw new Error('dist/index.html missing — run vite build first');
 }
 
 for (const route of STATIC_ROUTES) {
-  writeRouteHtml(route);
+  writeRouteHtml(route, blogPosts);
 }
 
-for (const post of parseBlogPosts()) {
-  writeRouteHtml({
-    path: `/blog/${post.slug}`,
-    title: `${post.title} | Hunt Cheats Blog`,
-    description: post.excerpt,
-    h1: post.title,
-    excerpt: post.excerpt,
-    type: 'article',
-  });
+for (const post of blogPosts) {
+  writeRouteHtml(
+    {
+      path: `/blog/${post.slug}`,
+      title: `${post.title} | Hunt Cheats Blog`,
+      description: post.excerpt,
+      h1: post.title,
+      excerpt: post.excerpt,
+      type: 'article',
+    },
+    blogPosts
+  );
 }
 
-console.log(`Prerendered ${STATIC_ROUTES.length + parseBlogPosts().length} SEO route HTML files`);
+console.log(`Prerendered ${STATIC_ROUTES.length + blogPosts.length} SEO route HTML files`);

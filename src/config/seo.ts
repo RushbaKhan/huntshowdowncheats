@@ -7,7 +7,7 @@ export const HOME_TITLE =
   'Hunt Showdown Cheats – Aimbot, ESP & Wallhack';
 
 export const HOME_DESCRIPTION =
-  'Undetected Hunt Showdown cheats with aimbot, ESP, wallhack, triggerbot, radar and DMA. See hunters through walls, silent aim, recoil control, stream-proof mode. Updated every patch. Windows 10 & 11.';
+  'Undetected Hunt Showdown cheats with aimbot, ESP, wallhack, triggerbot and radar. Stream-proof mode, silent aim, recoil control. Updated every Crytek patch.';
 
 export const BUY_TITLE =
   'Get Hunt Showdown Cheats – Aimbot, ESP & Radar';
