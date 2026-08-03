@@ -54,7 +54,7 @@ export function staticSeoBody(route, blogPosts = []) {
   <nav aria-label="Guides">
     <p>Popular guides: ${guideLinks()}.</p>
   </nav>
-  <p>Official store: <a href="https://zadeyo.com/go/DEMON?to=%2Fproducts%2Fhunt-showdown" rel="noopener noreferrer">Get Hunt Showdown Cheats on Zadeyo</a>.</p>
+  <p>Official store: <a href="https://zadeyo.com/go/RUSHBA?to=%2Fproducts%2Fhunt-showdown" rel="noopener noreferrer">Get Hunt Showdown Cheats on Zadeyo</a>.</p>
 </main>`;
   }
 
